@@ -73,12 +73,31 @@ void Eitkin_by_X(double function[2][11], double X)
 
     printf("X     Y     t1       t2       t3       t4       t5       Di       Yi       Yi / Di\n");
     printf("        %8.2f %8.2f %8.2f %8.2f %8.2f\n", Eitkin[0][2], Eitkin[0][3], Eitkin[0][4], Eitkin[0][5], Eitkin[0][6]);
+
     for (i = 1; i < 6; i++)
     {
         printf("%.2f  %.2f  %.2f %8.2f %8.2f %8.2f %8.2f %8.2f %8.2f %8.2f\n", Eitkin[i][0], Eitkin[i][1], Eitkin[i][2], Eitkin[i][3], Eitkin[i][4], Eitkin[i][5], Eitkin[i][6], Eitkin[i][7], Eitkin[i][1], Eitkin[i][8]);
     }
+
     printf("%79.2f\n", S);
     printf("Произведение диагонали: %.2f\n", P);
+
+    double L = 0.0;
+
+    for (int i = 0; i < 6; i++)
+    {
+        double Li = 1.0;
+        for (int j = 0; j < 6; j++)
+        {
+            if (i != j)
+            {
+                Li *= (X - Eitkin[j][0]) / (Eitkin[i][0] - Eitkin[j][0]);
+            }
+        }
+        L += Eitkin[i][1] * Li;
+    }
+
+    printf("Значение функции по интерполяционной формуле Лагранжа: %.2f\n", L);
     printf("\n\n\n");
 }
 
